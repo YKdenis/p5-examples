@@ -1,6 +1,6 @@
 const SHAPES_AMOUNT = 40;
-const AMOUNT_OF_VERTEXES = 40;
-const Y_RANGE = 80;
+const AMOUNT_OF_VERTEXES = 4;
+const Y_RANGE = 30;
 const X_RANGE = 5;
 const SPEED = 3;
 
@@ -12,7 +12,7 @@ function setup() {
 function draw() {
 	background(30);
 
-	rotateY(60);
+	// rotateX(60);
 
 	noFill();
 	stroke(255);
@@ -24,6 +24,9 @@ function draw() {
 
 		let n = noise(i);
 		stroke(r, g, b);
+		// rotateX(20 + i);
+		translate(5 * sin(frameCount) * n, 5 * sin(frameCount) * n, 10 + n);
+		scale(1 + abs(sin(i + frameCount)) / 30);
 		beginShape();
 		for (let j = 0; j < 360; j += 360 / AMOUNT_OF_VERTEXES) {
 			let rad = i * X_RANGE;
@@ -33,19 +36,5 @@ function draw() {
 			vertex(x, y, z);
 		}
 		endShape(CLOSE);
-
-		push();
-		translate(400, 0);
-		rotateY(180);
-		beginShape();
-		for (let j = 0; j < 360; j += 360 / AMOUNT_OF_VERTEXES) {
-			let rad = -i * X_RANGE;
-			let x = rad * cos(j + frameCount);
-			let y = rad * sin(j + frameCount);
-			let z = sin(frameCount * SPEED + i * 5) * Y_RANGE;
-			vertex(x, y, z);
-		}
-		endShape(CLOSE);
-		pop();
 	}
 }
