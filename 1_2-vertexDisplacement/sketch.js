@@ -1,7 +1,10 @@
-//this variable will hold our shader object
+// This line is used for auto completion in VSCode
+
 let cnv;
 
+//this variable will hold our shader object
 let myShader;
+let noise;
 
 function preload() {
 	// a shader is composed of two parts, a vertex shader, and a fragment shader
@@ -11,6 +14,8 @@ function preload() {
 	// loadShader() first takes the filename of a vertex shader, and then a frag shader
 	// these file types are usually .vert and .frag, but you can actually use anything. .glsl is another common one
 	myShader = loadShader('shader.vert', 'shader.frag');
+
+	noise = loadImage('noise.png');
 }
 
 function setup() {
@@ -29,30 +34,18 @@ function draw() {
 	background(0);
 	// shader() sets the active shader with our shader
 	shader(myShader);
-	let n = noise(random(-1, 1));
 
 	// Send the frameCount to the shader
 	myShader.setUniform('uFrameCount', frameCount);
+	myShader.setUniform('uNoiseTexture', noise);
 
 	// Rotate our geometry on the X and Y axes
 	rotateX(frameCount * 0.01);
-	rotateY(frameCount * 0.5);
-	rotateZ(frameCount * 0.5);
-	translate(n, n);
+	rotateY(frameCount * 0.05);
+
 	// Draw some geometry to the screen
 	// We're going to tessellate the sphere a bit so we have some more geometry to work with
-
-	// add point light to showcase specular material
-	let locX = mouseX - width / 2;
-	let locY = mouseY - height / 2;
-	directionalLight(255, 255, 255, -locX, -locY, 10);
-
-	specularMaterial(250);
-	shininess(50);
-	push();
-	// translate(mouseX / 5, -mouseY / 5, -mouseY / 5 + -mouseX / 5);
-	ellipsoid(width / 5, 200, 200, 200, 200);
-	pop();
+	ellipsoid(width / 5, 200, 200);
 }
 
 function windowResized() {

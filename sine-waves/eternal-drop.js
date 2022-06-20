@@ -1,7 +1,7 @@
-const SHAPES_AMOUNT = 140;
-const AMOUNT_OF_VERTEXES = 3;
+const SHAPES_AMOUNT = 60;
+const AMOUNT_OF_VERTEXES = 4;
 const Y_RANGE = 100;
-const X_RANGE = 1;
+const X_RANGE = 4;
 const SPEED = 2;
 
 function setup() {
@@ -12,8 +12,8 @@ function setup() {
 function draw() {
 	background(30);
 
-	rotateY(40 + frameCount / 20);
-	rotateX(60);
+	rotateX(90);
+	rotateY(90);
 
 	noFill();
 	stroke(255);
@@ -35,7 +35,7 @@ function draw() {
 			let x = rad * cos(j + frameCount);
 			let y = rad * sin(j + frameCount);
 			let z = sin(frameCount * SPEED + i * 5) * Y_RANGE;
-			vertex(x, y, -z);
+			vertex(-x, -y, -z);
 		}
 		endShape(CLOSE);
 		pop();

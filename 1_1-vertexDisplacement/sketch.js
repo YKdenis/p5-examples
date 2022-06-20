@@ -41,18 +41,7 @@ function draw() {
 	translate(n, n);
 	// Draw some geometry to the screen
 	// We're going to tessellate the sphere a bit so we have some more geometry to work with
-
-	// add point light to showcase specular material
-	let locX = mouseX - width / 2;
-	let locY = mouseY - height / 2;
-	directionalLight(255, 255, 255, -locX, -locY, 10);
-
-	specularMaterial(250);
-	shininess(50);
-	push();
-	// translate(mouseX / 5, -mouseY / 5, -mouseY / 5 + -mouseX / 5);
-	ellipsoid(width / 5, 200, 200, 200, 200);
-	pop();
+	sphere(width / 4, 200, 200);
 }
 
 function windowResized() {
